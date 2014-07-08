@@ -56,4 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     func pubnubClient(client: PubNub!, didUnsubscribeOnChannels channels: [AnyObject]!) {
         println("DELEGATE: Unsubscribed frome channel: \(channels)")
     }
+    
+    func pubnubClient(client: PubNub!, didDisablePresenceObservationOnChannels channels: [AnyObject]!) {
+        println("DELEGATE: Disabled Presence observation.")
+    }
 }

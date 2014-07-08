@@ -60,6 +60,7 @@ class ViewController: UIViewController {
                 PubNub.sendMessage("\(uuid) says: What's happening?!", toChannel: myChannel)
             case PNPresenceEventType.Leave:
                 PubNub.sendMessage("\(uuid) says: Catch you on the flip side!", toChannel: myChannel)
+                PubNub.disablePresenceObservationForChannel(myChannel)
                 PubNub.unsubscribeFromChannel(myChannel)
             case PNPresenceEventType.Timeout:
                 PubNub.sendMessage("\(uuid) says: Too bad!", toChannel: myChannel)
