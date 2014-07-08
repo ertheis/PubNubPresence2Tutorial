@@ -9,13 +9,13 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
                             
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        // Override point for customization after application launch.
+        PubNub.setDelegate(self)
         return true
     }
 
@@ -40,7 +40,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func pubnubClient(client: PubNub!, didConnectToOrigin origin: String!) {
+        println("DELEGATE: Connected to origin \(origin)")
+    }
+    
+    func pubnubClient(client: PubNub!, didEnablePresenceObservationOnChannels channels: [AnyObject]!) {
+        println("DELEGATE: Presence observation enabled.")
+    }
+    
+    func pubnubClient(client: PubNub!, didReceivePresenceEvent event: PNPresenceEvent) {
+        println("DELEGATE: Received Presence event: \(event)")
+    }
+    
+    func pubnubClient(client: PubNub!, didUnsubscribeOnChannels channels: [AnyObject]!) {
+        println("DELEGATE: Unsubscribed frome channel: \(channels)")
+    }
 }
-
